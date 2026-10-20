@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Isotop, Isobar, Isoton, dan Isoelektron - Bahan Ajar Interaktif Kimia Kelas X</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+:root{--bg:#f7f9fb;--sf:#fff;--ink:#14263a;--mut:#56677a;--ln:#d6dee6;--iso:#2563eb;--bar:#c2410c;--ton:#15803d;--el:#7c3aed;--ok:#15803d;--no:#b91c1c;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1823;--sf:#152433;--ink:#e6edf4;--mut:#9fb0c1;--ln:#2b3f52;--iso:#6aa0ff;--bar:#f59e5b;--ton:#4ade80;--el:#b79cff;--ok:#4ade80;--no:#f87171;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1823;--sf:#152433;--ink:#e6edf4;--mut:#9fb0c1;--ln:#2b3f52;--iso:#6aa0ff;--bar:#f59e5b;--ton:#4ade80;--el:#b79cff;--ok:#4ade80;--no:#f87171;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Lexend,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:800px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.5rem;line-height:1.25;margin:0 0 4px}
+h2{font-size:1.25rem;margin:0 0 10px}
+h3{font-size:1.02rem;margin:20px 0 6px}
+.sub{color:var(--mut);margin:0 0 14px;font-size:.92rem}
+nav{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--ln);margin-bottom:16px}
+nav button{flex:none;background:none;border:0;border-bottom:3px solid transparent;color:var(--mut);font:inherit;font-size:.85rem;padding:8px 10px;cursor:pointer}
+nav button.on{color:var(--ink);border-color:var(--ink);font-weight:600}
+nav button.done::before{content:"\2713 ";color:var(--ok)}
+section{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:20px}
+section[hidden]{display:none}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--iso);outline-offset:2px}
+.nt{display:inline-flex;align-items:center;gap:1px;font-weight:600;white-space:nowrap}
+.nt i{display:flex;flex-direction:column;font-style:normal;font-size:.62em;line-height:1.1;text-align:right}
+.ch{align-self:flex-start;font-size:.62em}
+.q{border-top:1px solid var(--ln);padding:14px 0}
+.q:first-of-type{border-top:0}
+.opts{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.opt,.btn{font:inherit;background:var(--sf);color:var(--ink);border:1.5px solid var(--ln);border-radius:8px;padding:9px 12px;text-align:left;cursor:pointer}
+.btn{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600;text-align:center}
+.btn.ghost{background:none;color:var(--ink)}
+.opt.sel{border-color:var(--iso);box-shadow:inset 0 0 0 1px var(--iso)}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.opt.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 14%,transparent)}
+.ex{margin:8px 0 0;font-size:.9rem;color:var(--mut)}
+.res{margin-top:14px;padding:12px 14px;border-left:4px solid var(--ink);background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.card{border-left:5px solid var(--c);padding:6px 0 6px 14px;margin:12px 0}
+.card h3{margin:0;color:var(--c)}
+.card p{margin:2px 0}
+.iso{--c:var(--iso)}.bar{--c:var(--bar)}.ton{--c:var(--ton)}.el{--c:var(--el)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+table.s{width:auto;margin:6px 0 10px}
+th,td{padding:6px 10px;text-align:center;border-bottom:1px solid var(--ln)}
+tbody.pr td{border-bottom:0}
+tbody.pr:not(:last-child) tr:last-child td{border-bottom:1px solid var(--ln)}
+td.iso,td.bar,td.ton,td.el{font-weight:700;background:color-mix(in srgb,var(--c) 20%,transparent)}
+.tw{overflow-x:auto}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+input[type=number],input[type=text],select{font:inherit;padding:7px 9px;border:1.5px solid var(--ln);border-radius:8px;background:var(--sf);color:var(--ink)}
+input[type=number]{width:80px}
+.big{font-size:2rem}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.at{border:1px solid var(--ln);border-radius:10px;padding:12px}
+.dots{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px}
+.dots span{width:9px;height:9px;border-radius:50%}
+.dp{background:var(--iso)}.dn{border:2px solid var(--mut)}.de{background:var(--el);width:6px!important;height:6px!important;align-self:center}
+.lg{font-size:.82rem;color:var(--mut)}
+.cmp{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:6px 14px;font-size:.93rem;align-items:center}
+.verd{margin-top:8px;padding:10px 14px;border-radius:8px;border-left:5px solid var(--c,var(--mut));background:color-mix(in srgb,var(--c,var(--mut)) 10%,transparent)}
+.foot{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.prow,.kr{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 0;border-top:1px solid var(--ln)}
+.prow .lb{min-width:70px;font-weight:600}
+.kr span{flex:1 1 240px}
+.kr .opt{padding:5px 12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+#login{max-width:440px;margin:7vh auto;padding:0 16px}
+.lbox{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:22px}
+.lbox label{display:block;margin:14px 0 4px;font-size:.9rem}
+.lbox input{width:100%}
+.bar2{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:.85rem;color:var(--mut);margin-bottom:10px;flex-wrap:wrap}
+body{background-color:var(--bg);background-image:radial-gradient(color-mix(in srgb,var(--ink) 10%,transparent) 1px,transparent 1.3px);background-size:22px 22px}
+h1,h2,h3{font-family:"Space Grotesk",Lexend,system-ui,sans-serif;letter-spacing:-.01em}
+.hero{position:relative;overflow:hidden;border-radius:18px;padding:22px;color:#fff;background:linear-gradient(135deg,#0b1f3a 0%,#1e3a8a 55%,#0f766e 100%);margin-bottom:14px;box-shadow:0 10px 30px -12px rgba(11,31,58,.6)}
+.hero h1{margin:0 0 6px;font-size:1.65rem;max-width:calc(100% - 100px)}
+.hero p{margin:0;opacity:.9;font-size:.92rem;max-width:calc(100% - 100px)}
+.hero .atomwrap{position:absolute;right:8px;top:8px;width:112px;height:112px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chips b{font-size:.78rem;padding:3px 11px;border-radius:999px;color:#0b1f3a}
+.atom{width:100%;height:100%}
+.spin{transform-origin:0 0;animation:sp 22s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+.prog{height:6px;border-radius:99px;background:var(--ln);overflow:hidden;margin:0 0 10px}
+.prog i{display:block;height:100%;width:12%;background:linear-gradient(90deg,var(--iso),var(--el),var(--bar));transition:width .4s}
+nav{border:0;gap:6px;padding-bottom:8px}
+nav button{border:1.5px solid var(--ln);border-radius:999px;background:var(--sf);padding:6px 12px;white-space:nowrap}
+nav button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+section{border-radius:16px;border-top:5px solid var(--sec,var(--iso));box-shadow:0 8px 24px -16px rgba(11,31,58,.5)}
+section h2{display:flex;align-items:center;gap:10px}
+.ic{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;background:color-mix(in srgb,var(--sec,var(--iso)) 18%,transparent);font-size:1.2rem}
+.btn{border-radius:999px;padding:10px 22px;background:linear-gradient(135deg,#1e3a8a,#0f766e);border:0;color:#fff;box-shadow:0 6px 14px -6px rgba(30,58,138,.7)}
+.btn.ghost{background:var(--sf);color:var(--ink);border:1.5px solid var(--ln);box-shadow:none}
+.opt{border-radius:12px;transition:transform .12s,border-color .12s}
+.opt:hover{transform:translateY(-2px);border-color:var(--iso)}
+.card{background:color-mix(in srgb,var(--c) 8%,transparent);border:1.5px solid color-mix(in srgb,var(--c) 35%,transparent);border-left:6px solid var(--c);border-radius:12px;padding:10px 14px}
+.big .nt{padding:6px 14px;border:2px solid var(--iso);border-radius:10px;background:color-mix(in srgb,var(--iso) 10%,var(--sf));box-shadow:3px 3px 0 var(--iso)}
+.at{border-radius:14px}
+.res{border-radius:10px}
+.lbox{border-radius:18px}
+.lbox .atomwrap{width:96px;height:96px;margin:0 auto 6px;background:#0b1f3a;border-radius:50%}
+textarea{width:100%;font:inherit;padding:8px 10px;border:1.5px solid var(--ln);border-radius:10px;background:var(--sf);color:var(--ink);min-height:64px;resize:vertical}
+.rl label{display:block;margin:12px 0 4px;font-size:.92rem}
+</style>
+</head>
+<body>
+<div id="login"><div class="lbox"><div class="atomwrap"></div><h1 style="font-size:1.35rem;text-align:center">Isotop, Isobar, Isoton, dan Isoelektron</h1>
+<p class="sub">Kimia kelas X · SMAN 1 Tanjung. Masuk dulu dengan nama dan kelasmu supaya semua nilai belajarmu masuk ke guru.</p>
+<p class="sub">Guru pembuat: <b>Kiky Astyana, S.Pd</b> · Guru Kimia SMA Negeri 1 Tanjung</p>
+<label for="nm">Nama lengkap</label><input type="text" id="nm" autocomplete="name">
+<label for="kl">Kelas</label><input type="text" id="kl" placeholder="contoh: X-3">
+<p class="ex" id="lerr" style="color:var(--no)"></p>
+<button class="btn" id="bm" style="width:100%;margin-top:8px">Masuk</button></div></div>
+<div class="wrap" id="app" hidden>
+<div class="bar2"><span id="who"></span><span><span id="st"></span> <button class="opt" id="out" style="padding:4px 10px">Keluar</button></span></div>
+<div class="hero"><div class="atomwrap"></div><h1>Isotop, Isobar, Isoton, dan Isoelektron</h1>
+<p>Kimia kelas X · Struktur Atom · 1 pertemuan (sekitar 2 JP). Kenali keluarga atom dari kemiripan datanya.</p>
+<div class="chips"><b style="background:#93c5fd">Isotop: Z sama</b><b style="background:#fdba74">Isobar: A sama</b><b style="background:#86efac">Isoton: n sama</b><b style="background:#c4b5fd">Isoelektron: e sama</b></div></div>
+<div class="prog"><i id="pg"></i></div>
+<nav id="nav" aria-label="Langkah belajar"></nav>
+
+<section hidden>
+<h2>Asesmen Awal</h2>
+<p>Jawab 3 soal berikut untuk mengetahui titik awalmu. Nilai ini tidak memengaruhi hasil akhir.</p>
+<div id="pre"></div>
+</section>
+
+<section hidden>
+<h2>Apersepsi: Atom dalam Kehidupan Sehari-hari</h2>
+<p>Pernahkah kamu mendengar bahwa pisang sedikit radioaktif, atau bahwa umur fosil bisa dihitung? Semua itu berkaitan dengan atom-atom yang mirip tetapi tidak sama. Ketuk tiap kartu untuk melihat contohnya.</p>
+<div class="opts" id="ak"></div>
+<div class="res" id="ad">Ketuk salah satu kartu di atas.</div>
+<h3>Analogi tas sekolah</h3>
+<p>Bayangkan isi sebuah tas: perlengkapan wajib (seperti Z, yang menentukan "identitas") ditambah buku tambahan (seperti n). Total isi tas adalah A. Dua tas dengan perlengkapan wajib sama tetapi buku tambahan berbeda mirip <b>isotop</b>. Total isi sama tetapi perlengkapan wajib berbeda mirip <b>isobar</b>. Buku tambahan sama mirip <b>isoton</b>.</p>
+<h3>Ingat kembali: notasi dan partikel dasar</h3>
+<p>Atom ditulis dengan lambang <span data-n="A,Z,X"></span>. Dari notasi itu kita menghitung partikel dasarnya:</p>
+<ul>
+<li>proton (p) = Z (nomor atom)</li>
+<li>neutron (n) = A &minus; Z</li>
+<li>elektron (e) = Z untuk atom netral; untuk ion, e = Z &minus; muatan (contoh: Z = 11, muatan +1, maka e = 10)</li>
+</ul>
+<p>Coba hitung partikel atom-atom dari contoh tadi:</p>
+<div class="row">
+<label>Z <input type="number" id="cz" min="1" max="60" value="19"></label>
+<label>A <input type="number" id="ca" min="1" max="140" value="40"></label>
+<label>Muatan <input type="number" id="cc" min="-3" max="3" value="0"></label>
+</div>
+<div class="row" id="presets" style="margin-top:8px"></div>
+<div class="res" id="calc"></div>
+<h3>Pertanyaan pemantik</h3>
+<p>Mengapa K-40 dan Ca-40 sama-sama bermassa 40 tetapi disebut unsur berbeda? Dan mengapa ion K<sup>+</sup> dan Cl<sup>&minus;</sup>, yang berasal dari unsur berbeda, bisa memiliki jumlah elektron yang sama? Simpan jawabanmu, kita buktikan di materi.</p>
+</section>
+
+<section hidden>
+<h2>Tujuan Pembelajaran</h2>
+<p>Setelah pelajaran ini, kamu mampu:</p>
+<ol>
+<li>Menentukan jumlah proton, elektron, dan neutron dari notasi atom atau ion.</li>
+<li>Membandingkan Z, A, n, dan jumlah elektron dari pasangan atom atau ion.</li>
+<li>Mengelompokkan atom ke dalam isotop, isobar, dan isoton berdasarkan kemiripan datanya.</li>
+<li>Menentukan spesies yang isoelektron.</li>
+</ol>
+<p class="sub">Alur: asesmen awal, apersepsi, materi, simulasi, praktik, kuis, asesmen akhir (10 soal bentuk TKA).</p>
+</section>
+
+<section hidden>
+<h2>Materi: Struktur Atom, Pengelompokan Isotop, Isobar, dan Isoton</h2>
+<h3>Mengamati pasangan atom</h3>
+<p>Perhatikan empat pasangan berikut. Sel berwarna adalah data yang sama.</p>
+<div class="tw"><table><thead><tr><th>Spesies</th><th>Z</th><th>A</th><th>n</th><th>e</th></tr></thead></table></div>
+<h3>Empat kelompok kemiripan</h3>
+<div class="card iso"><h3>Isotop: Z sama, A berbeda</h3><p>Contoh: <span data-n="12,6,C"></span>, <span data-n="13,6,C"></span>, <span data-n="14,6,C"></span>. Semuanya karbon (Z = 6) dengan 6, 7, dan 8 neutron.</p><p class="sub">iso-top: "tempat yang sama" di tabel periodik.</p></div>
+<div class="card bar"><h3>Isobar: A sama, Z berbeda</h3><p>Contoh: <span data-n="14,6,C"></span> dan <span data-n="14,7,N"></span>. Massanya 14, tetapi unsurnya berbeda.</p><p class="sub">iso-bar: "berat (massa) yang sama".</p></div>
+<div class="card ton"><h3>Isoton: n sama, Z dan A berbeda</h3><p>Contoh: <span data-n="13,6,C"></span> dan <span data-n="14,7,N"></span>. Keduanya punya 7 neutron.</p><p class="sub">iso-ton: "neutron yang sama".</p></div>
+<div class="card el"><h3>Isoelektron: jumlah elektron sama, Z berbeda</h3><p>Contoh: <span data-n="23,11,Na,1"></span>, <span data-n="24,12,Mg,2"></span>, <span data-n="19,9,F,-1"></span>, dan <span data-n="20,10,Ne"></span> masing-masing memiliki 10 elektron. Hitung dengan e = Z &minus; muatan.</p><p class="sub">Isoelektron membandingkan elektron, jadi berlaku untuk atom dan ion.</p></div>
+<h3>Ringkasan</h3>
+<div class="tw"><table><thead><tr><th>Kelompok</th><th>Sama</th><th>Berbeda</th></tr></thead><tbody>
+<tr><td>Isotop</td><td>Z</td><td>A, n</td></tr>
+<tr><td>Isobar</td><td>A</td><td>Z</td></tr>
+<tr><td>Isoton</td><td>n</td><td>Z, A</td></tr>
+<tr><td>Isoelektron</td><td>e</td><td>Z</td></tr></tbody></table></div>
+<h3>Cara cepat mengelompokkan</h3>
+<ol>
+<li>Hitung n = A &minus; Z dan e = Z &minus; muatan.</li>
+<li>Z sama: isotop. Z berbeda, A sama: isobar.</li>
+<li>Z dan A berbeda, n sama: isoton.</li>
+<li>Z berbeda, e sama: isoelektron. Satu pasangan bisa memenuhi lebih dari satu hubungan, misalnya <span data-n="40,18,Ar"></span> dan <span data-n="40,20,Ca,2"></span> (isobar dan isoelektron).</li>
+</ol>
+<p>Jawaban pertanyaan pemantik: Z sama berarti unsur sama, hanya massanya berbeda. Unsur berbeda bisa isoelektron jika jumlah elektronnya sama.</p>
+</section>
+
+<section hidden>
+<h2>Simulasi Pengelompokan</h2>
+<p>Pilih dua atom atau ion. Semua hubungan yang berlaku ditampilkan.</p>
+<div class="row">
+<label>Spesies 1 <select id="s1"></select></label>
+<label>Spesies 2 <select id="s2"></select></label>
+</div>
+<p class="lg"><span class="dots" style="display:inline-flex;margin:0"><span class="dp"></span></span> proton &nbsp; <span class="dots" style="display:inline-flex;margin:0"><span class="dn"></span></span> neutron &nbsp; <span class="dots" style="display:inline-flex;margin:0"><span class="de"></span></span> elektron</p>
+<div class="pair" id="sp"></div>
+<div class="cmp" id="sc"></div>
+<div id="sv"></div>
+</section>
+
+<section hidden>
+<h2>Praktik Pengelompokan Data</h2>
+<h3>Bagian 1: isotop, isobar, isoton</h3>
+<p>Data enam atom hipotetis (netral). Hitung dulu n = A &minus; Z, lalu tentukan hubungan tiap pasangan.</p>
+<div class="tw"><table><thead><tr><th>Atom</th><th>Z</th><th>A</th></tr></thead><tbody id="pt"></tbody></table></div>
+<div id="pp" style="margin-top:12px"></div>
+<div class="row" style="margin-top:12px"><button class="btn" id="pc">Periksa bagian 1</button></div>
+<div class="res" id="pr" hidden></div>
+<h3>Bagian 2: isoelektron</h3>
+<p>Tentukan jumlah elektron tiap ion, lalu lihat mana yang isoelektron.</p>
+<div id="pi"></div>
+<div class="row" style="margin-top:12px"><button class="btn" id="pc2">Periksa bagian 2</button></div>
+<div class="res" id="pr2" hidden></div>
+</section>
+
+<section hidden>
+<h2>Kuis</h2>
+<p>Pilih jawaban; penjelasan langsung muncul.</p>
+<div id="kz"></div>
+</section>
+
+<section hidden>
+<h2>Asesmen Akhir</h2>
+<p>10 soal bentuk TKA: pilihan ganda (5 opsi), pilihan ganda kompleks (lebih dari satu jawaban benar), dan pilihan ganda kompleks kategori (benar atau salah). Soal kompleks dinilai benar jika semua responsnya tepat.</p>
+<div id="post"></div>
+</section>
+
+<section hidden>
+<h2>Refleksi</h2>
+<p>Luangkan beberapa menit untuk melihat kembali belajarmu hari ini. Jawablah dengan jujur; refleksi membantu dirimu dan gurumu.</p>
+<div id="rj"></div>
+<h3>Seberapa setuju kamu dengan pernyataan berikut?</h3>
+<p class="lg">1 = tidak setuju, 2 = kurang setuju, 3 = setuju, 4 = sangat setuju</p>
+<div id="rl"></div>
+<h3>Tulis dengan kalimatmu sendiri</h3>
+<div class="rl">
+<label for="t1">Bagian yang paling mudah kupahami</label><textarea id="t1" maxlength="500"></textarea>
+<label for="t2">Bagian yang masih membingungkan</label><textarea id="t2" maxlength="500"></textarea>
+<label for="t3">Satu benda atau peristiwa di sekitarku yang berkaitan dengan materi ini</label><textarea id="t3" maxlength="500"></textarea>
+</div>
+<div class="row" style="margin-top:14px"><button class="btn" id="rs">Kirim refleksi</button></div>
+<div class="res" id="rr" hidden></div>
+</section>
+
+<div class="foot"><button class="btn ghost" id="prev">Sebelumnya</button><button class="btn" id="next">Lanjut</button></div><p class="sub" style="margin-top:22px">Guru pembuat: Kiky Astyana, S.Pd · Guru Kimia SMA Negeri 1 Tanjung · Nilaimu dikirim otomatis ke spreadsheet guru.</p>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const SHEET_URL='https://script.google.com/macros/s/AKfycbzkEfQD2aIY5IdGpbnPdhry1ms6wYUplsK9gCjCHi5ra-cGIPCU9ez83Vt3-6nuImHOiw/exec';
+const MEDIA='Isotop-Isobar-Isoton',LS='isotop_sesi_v1';
+let S=null;try{S=JSON.parse(localStorage.getItem(LS))}catch(e){}
+const save=()=>{try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}};
+function stat(t,c){const e=$('st');e.textContent=t;e.style.color=c||'var(--mut)'}
+async function send(){
+ if(!S)return;
+ if(!/^https:/.test(SHEET_URL)){stat('Tautan spreadsheet belum diisi guru','var(--no)');return}
+ const r=S.r,ng=(r.awal!=null&&r.akhir!=null&&r.awal<100)?Math.round(100*(r.akhir-r.awal)/(100-r.awal))/100:'';
+ const b={media:MEDIA,nama:S.nama,kelas:S.kelas,mulai:S.mulai,awal:r.awal,praktik1:r.praktik1,praktik2:r.praktik2,kuis:r.kuis,akhir:r.akhir,ngain:ng,r1:r.r1,r2:r.r2,r3:r.r3,r4:r.r4,t1:r.t1,t2:r.t2,t3:r.t3};
+ stat('Mengirim nilai ...');
+ const o={method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(b)};
+ try{
+  let t=null;
+  try{const res=await fetch(SHEET_URL,o);t=(await res.text()).trim()}
+  catch(e){await fetch(SHEET_URL,{...o,mode:'no-cors'});S.dirty=false;save();stat('Dikirim, tetapi belum bisa diverifikasi. Cek spreadsheet guru.','var(--mut)');return}
+  if(t==='ok'){S.dirty=false;save();stat('Nilai masuk ke spreadsheet guru \u2713','var(--ok)')}
+  else{S.dirty=true;save();stat('Ditolak skrip: '+t.replace(/<[^>]*>/g,' ').slice(0,90),'var(--no)')}
+ }catch(e){S.dirty=true;save();stat('Belum terkirim, dicoba lagi saat online','var(--no)')}}
+function rec(k,v){if(!S)return;S.r[k]=v;S.dirty=true;save();send()}
+addEventListener('online',()=>{if(S&&S.dirty)send()});
+const recm=o=>{if(!S)return;Object.assign(S.r,o);S.dirty=true;save();send()};
+function enter(){$('login').hidden=true;$('app').hidden=false;$('who').textContent=S.nama+' · Kelas '+S.kelas;go(0);if(S.dirty)send();else stat('Nilai dikirim otomatis saat tiap tahap selesai')}
+$('bm').onclick=()=>{const n=$('nm').value.trim().replace(/\s+/g,' '),k=$('kl').value.trim().toUpperCase();
+ if(n.length<3||!k){$('lerr').textContent='Isi nama lengkap dan kelas.';return}
+ S={nama:n,kelas:k,mulai:new Date().toISOString(),r:{},dirty:false};save();enter()};
+$('out').onclick=()=>{if(S&&S.dirty)send();try{localStorage.removeItem(LS)}catch(e){}location.reload()};
+const CH=c=>c>0?(c>1?c:'')+'+':c<0?(c<-1?-c:'')+'\u2212':'';
+const N=(A,Z,S,c=0)=>`<span class="nt"><i><b>${A}</b><b>${Z}</b></i>${S}${c?`<sup class="ch">${CH(c)}</sup>`:''}</span>`;
+const TB=(h,r)=>`<table class="s"><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${r.map(x=>`<tr>${x.map(y=>`<td>${y}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+const SY='H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca'.split(' ');
+const T=['Asesmen awal','Apersepsi','Tujuan','Materi','Simulasi','Praktik','Kuis','Asesmen akhir','Refleksi'];
+const OP=['Isotop','Isobar','Isoton','Isoelektron','Bukan satu pun dari keempatnya'];
+const secs=[...document.querySelectorAll('section')];
+const EM=['🧪','💡','🎯','📘','⚛️','✍️','🎮','🏁','🌱'],CL=['var(--el)','var(--bar)','var(--ton)','var(--iso)','var(--el)','var(--bar)','var(--ton)','var(--iso)','var(--el)'];
+secs.forEach((x,i)=>{const h=x.querySelector('h2');h.innerHTML='<span class="ic">'+EM[i]+'</span><span>'+h.innerHTML+'</span>';x.style.setProperty('--sec',CL[i])});
+const ATOM=`<svg class="atom" viewBox="-60 -60 120 120" aria-hidden="true"><g class="spin"><g fill="none" stroke="#fff" stroke-opacity=".55"><ellipse rx="52" ry="19"/><ellipse rx="52" ry="19" transform="rotate(60)"/><ellipse rx="52" ry="19" transform="rotate(120)"/></g><circle cx="52" r="4.5" fill="#6aa0ff"/><g transform="rotate(60)"><circle cx="-52" r="4.5" fill="#4ade80"/></g><g transform="rotate(120)"><circle cx="52" r="4.5" fill="#f59e5b"/></g></g><circle r="10" fill="#fbbf24"/><circle cx="-3.5" cy="-3" r="3.5" fill="#f97316"/><circle cx="3" cy="3.5" r="3.5" fill="#fde68a"/></svg>`;
+document.querySelectorAll('.atomwrap').forEach(e=>e.innerHTML=ATOM);
+let cur=0,pre=null;const seen=new Set();
+function go(i){cur=Math.max(0,Math.min(secs.length-1,i));seen.add(cur);if(cur===secs.length-1)jr();
+ secs.forEach((s,k)=>s.hidden=k!==cur);
+ [...$('nav').children].forEach((b,k)=>{b.classList.toggle('on',k===cur);b.classList.toggle('done',k!==cur&&seen.has(k))});
+ $('prev').style.visibility=cur?'visible':'hidden';$('next').style.visibility=cur<secs.length-1?'visible':'hidden';
+ $('pg').style.width=(100*(cur+1)/secs.length)+'%';window.scrollTo({top:0})}
+T.forEach((t,i)=>{const b=document.createElement('button');b.textContent=EM[i]+' '+t;b.onclick=()=>go(i);$('nav').append(b)});
+$('prev').onclick=()=>go(cur-1);$('next').onclick=()=>go(cur+1);
+
+function quiz(id,items,mode,done){
+ const root=$(id),ans=[];let locked=false;
+ const out=document.createElement('div');out.className='res';out.hidden=true;
+ const ok=(it,a)=>a!=null&&(it.t==='mc'?a.size===it.a.length&&it.a.every(x=>a.has(x)):it.t==='kat'?it.a.every((v,k)=>a[k]===v):a===it.a);
+ const dn=(it,a)=>a!=null&&(it.t==='mc'?a.size>0:it.t==='kat'?it.a.every((_,k)=>a[k]!=null):true);
+ const lab={pg:'Pilih satu jawaban.',mc:'Pilih semua jawaban yang benar.',kat:'Tentukan setiap pernyataan Benar atau Salah.'};
+ const els=items.map((it,i)=>{
+  it.t=it.t||'pg';
+  const d=document.createElement('div');d.className='q';
+  d.innerHTML=`<p><b>${i+1}.</b> ${it.q}</p>`+(mode==='final'?`<p class="ex" style="margin:-6px 0 8px">${lab[it.t]}</p>`:'');
+  const ex=document.createElement('p');ex.className='ex';ex.hidden=true;
+  if(it.t==='kat'){
+   ans[i]=[];
+   it.o.forEach((s,k)=>{const r=document.createElement('div');r.className='kr';r.innerHTML=`<span>${s}</span>`;
+    ['Benar','Salah'].forEach((l,v)=>{const b=document.createElement('button');b.className='opt';b.textContent=l;
+     b.onclick=()=>{if(locked)return;ans[i][k]=!v;r.querySelectorAll('button').forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};r.append(b)});
+    d.append(r)})
+  }else{
+   const bx=document.createElement('div');bx.className='opts';
+   it.o.forEach((t,j)=>{const b=document.createElement('button');b.className='opt';b.innerHTML=t;
+    b.onclick=()=>{
+     if(locked)return;
+     if(it.t==='mc'){ans[i]=ans[i]||new Set();ans[i].has(j)?ans[i].delete(j):ans[i].add(j);b.classList.toggle('sel')}
+     else if(mode==='instant'){
+      if(ans[i]!=null)return;ans[i]=j;b.classList.add(j===it.a?'ok':'no');bx.children[it.a].classList.add('ok');
+      ex.textContent=(j===it.a?'Benar. ':'Belum tepat. ')+it.e;ex.hidden=false;
+      if(ans.filter(x=>x!=null).length===items.length)finish()
+     }else{ans[i]=j;[...bx.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel')}
+    };bx.append(b)});
+   d.append(bx)}
+  d.append(ex);root.append(d);return{d,ex}});
+ const score=()=>items.reduce((s,it,i)=>s+(ok(it,ans[i])?1:0),0);
+ function finish(){locked=true;const s=score(),p=Math.round(100*s/items.length);
+  out.hidden=false;out.innerHTML=`Skor: <b>${s} dari ${items.length}</b> (nilai ${p}).`;done&&done(s,p,out)}
+ function reveal(){items.forEach((it,i)=>{const{d,ex}=els[i],a=ans[i];
+  if(it.t==='kat'){d.querySelectorAll('.kr').forEach((r,k)=>{const bt=r.querySelectorAll('button');bt.forEach(c=>c.classList.remove('sel'));bt[it.a[k]?0:1].classList.add('ok');if(a[k]!==it.a[k])bt[it.a[k]?1:0].classList.add('no')})}
+  else{const bt=d.querySelectorAll('.opt'),cor=it.t==='mc'?it.a:[it.a];bt.forEach(c=>c.classList.remove('sel'));
+   cor.forEach(x=>bt[x].classList.add('ok'));(it.t==='mc'?[...a]:[a]).forEach(x=>{if(!cor.includes(x))bt[x].classList.add('no')})}
+  ex.textContent=(ok(it,a)?'Benar. ':'Belum tepat. ')+it.e;ex.hidden=false})}
+ if(mode==='final'){
+  const sub=document.createElement('button');sub.className='btn';sub.textContent='Selesai';
+  sub.onclick=()=>{
+   if(!items.every((it,i)=>dn(it,ans[i]))){out.hidden=false;out.textContent='Masih ada soal yang belum dijawab.';return}
+   locked=true;reveal();sub.hidden=true;finish()};
+  root.append(sub)}
+ root.append(out)}
+
+quiz('pre',[
+ {q:`Jumlah neutron pada atom ${N(14,6,'C')} adalah ...`,o:['6','8','14','20','22'],a:1,e:'n = A − Z = 14 − 6 = 8.'},
+ {q:`Atom netral ${N(23,11,'Na')} memiliki jumlah elektron ...`,o:['10','11','12','23','34'],a:1,e:'Atom netral: e = p = Z = 11.'},
+ {q:`Atom ${N(35,17,'Cl')} dan ${N(37,17,'Cl')} sama-sama klorin. Yang membedakan keduanya adalah ...`,o:['Jumlah proton','Jumlah elektron','Jumlah neutron','Nomor atom','Muatan inti'],a:2,e:'Z sama (17), A berbeda, sehingga neutronnya berbeda (18 dan 20).'}
+],'final',(s,p,o)=>{pre=p;rec('awal',p);o.innerHTML+=' Lanjutkan ke apersepsi.'});
+
+function calc(){const Z=+$('cz').value,A=+$('ca').value,c=+$('cc').value||0,o=$('calc');
+ if(!Z||!A){o.textContent='Isi Z dan A.';return}
+ if(A<Z){o.textContent='Nomor massa (A) tidak boleh lebih kecil dari nomor atom (Z).';return}
+ o.innerHTML=`<span class="big">${N(A,Z,SY[Z-1]||'X',c)}</span><br>p = ${Z}, n = ${A} &minus; ${Z} = <b>${A-Z}</b>, e = ${Z} &minus; (${c}) = <b>${Z-c}</b>`}
+[['K',19,40,0],['Ca',20,40,0],['C',6,14,0],['K',19,39,1],['Cl',17,35,-1]].forEach(([s,z,a,c])=>{const b=document.createElement('button');b.className='opt';b.innerHTML=N(a,z,s,c);
+ b.onclick=()=>{$('cz').value=z;$('ca').value=a;$('cc').value=c;calc()};$('presets').append(b)});
+$('cz').oninput=$('ca').oninput=$('cc').oninput=calc;calc();
+
+(()=>{const tb0=document.querySelector('.tw table');
+ [[[12,6,'C',0],[14,6,'C',0],'iso'],[[14,6,'C',0],[14,7,'N',0],'bar'],[[13,6,'C',0],[14,7,'N',0],'ton'],[[23,11,'Na',1],[19,9,'F',-1],'el']].forEach(([x,y,k])=>{
+ const tb=document.createElement('tbody');tb.className='pr';const idx={iso:0,bar:1,ton:2,el:3}[k];
+ [x,y].forEach(([A,Z,S,c])=>{const tr=document.createElement('tr'),v=[Z,A,A-Z,Z-c];
+  tr.innerHTML=`<td>${N(A,Z,S,c)}</td>`+v.map((q,i)=>`<td class="${i===idx?k:''}">${q}</td>`).join('');tb.append(tr)});
+ tb0.append(tb)})})();
+document.querySelectorAll('[data-n]').forEach(e=>{const[a,z,s,c]=e.dataset.n.split(',');e.outerHTML=N(a,z,s,+c||0)});
+
+const AT=[['C',6,12,0],['C',6,13,0],['C',6,14,0],['N',7,14,0],['N',7,15,0],['O',8,16,0],['O',8,16,-2],['F',9,19,-1],['Ne',10,20,0],['Na',11,23,0],['Na',11,23,1],['Mg',12,24,0],['Mg',12,24,2],['P',15,31,0],['S',16,32,0],['S',16,32,-2],['Cl',17,35,-1],['Ar',18,40,0],['K',19,39,1],['K',19,40,0],['Ca',20,40,0],['Ca',20,40,2]];
+AT.forEach(([s,z,a,c],i)=>{const t=`${s}-${a}${c?', ion '+CH(c):''}`;$('s1').add(new Option(t,i));$('s2').add(new Option(t,i))});
+$('s1').value=17;$('s2').value=21;
+function card([s,z,a,c]){const n=a-z,e=z-c;return `<div class="at"><span class="big">${N(a,z,s,c)}</span><div class="sub" style="margin:0">p = ${z}, n = ${n}, e = ${e}</div><div class="dots">${'<span class="dp"></span>'.repeat(z)}${'<span class="dn"></span>'.repeat(n)}${'<span class="de"></span>'.repeat(e)}</div></div>`}
+function sim(){const x=AT[$('s1').value],y=AT[$('s2').value];
+ $('sp').innerHTML=card(x)+card(y);
+ const d=[['Z',x[1],y[1]],['A',x[2],y[2]],['n',x[2]-x[1],y[2]-y[1]],['e',x[1]-x[3],y[1]-y[3]]];
+ $('sc').innerHTML=d.map(([k,a,b])=>`<b>${k}</b><span>${a}</span><span>${b}</span><span style="color:var(--${a===b?'ok':'no'})">${a===b?'sama':'berbeda'}</span>`).join('');
+ const [,z1,a1,c1]=x,[,z2,a2,c2]=y,r=[];
+ if(z1===z2&&a1!==a2)r.push(['iso','Isotop: Z sama, A berbeda.']);
+ if(a1===a2&&z1!==z2)r.push(['bar','Isobar: A sama, Z berbeda.']);
+ if(a1-z1===a2-z2&&z1!==z2&&a1!==a2)r.push(['ton','Isoton: n sama, Z dan A berbeda.']);
+ if(z1-c1===z2-c2&&z1!==z2)r.push(['el','Isoelektron: jumlah elektron sama, Z berbeda.']);
+ $('sv').innerHTML=(r.length?r:[['','Tidak ada hubungan: tidak ada data yang memenuhi isotop, isobar, isoton, atau isoelektron.']]).map(([k,t])=>`<div class="verd ${k}">${t}</div>`).join('')}
+$('s1').onchange=$('s2').onchange=sim;sim();
+
+const HY={A:[11,23],B:[12,24],C:[11,24],D:[19,40],E:[20,40],F:[20,42]};
+$('pt').innerHTML=Object.entries(HY).map(([k,[z,a]])=>`<tr><td><b>${k}</b></td><td>${z}</td><td>${a}</td></tr>`).join('');
+const PR=[['A','C',0],['A','B',2],['B','C',1],['D','E',1],['E','F',0],['D','F',4]];
+$('pp').innerHTML=PR.map(([x,y],i)=>`<div class="prow"><span class="lb">${x} dan ${y}</span><select id="p${i}"><option value="">Pilih ...</option>${OP.map((o,j)=>`<option value="${j}">${o}</option>`).join('')}</select><span class="ex" id="pe${i}"></span></div>`).join('');
+$('pc').onclick=()=>{let s=0,all=true;
+ PR.forEach(([x,y,a],i)=>{const v=$('p'+i).value,e=$('pe'+i);
+  if(v===''){all=false;e.textContent='';return}
+  const[z1,a1]=HY[x],[z2,a2]=HY[y],info=`Z ${z1} dan ${z2}; A ${a1} dan ${a2}; n ${a1-z1} dan ${a2-z2}.`;
+  if(+v===a){s++;e.style.color='var(--ok)';e.textContent='Benar. '+info}else{e.style.color='var(--no)';e.textContent='Cek lagi. '+info}});
+ const r=$('pr');if(all)rec('praktik1',Math.round(100*s/PR.length));r.hidden=false;r.textContent=all?`Skor bagian 1: ${s} dari ${PR.length}. ${s===PR.length?'Semua tepat.':'Perbaiki pasangan bertanda merah.'}`:'Jawab semua pasangan dulu.'};
+
+const IO=[['Na',11,23,1],['Mg',12,24,2],['F',9,19,-1],['Cl',17,35,-1],['K',19,39,1],['S',16,32,-2]];
+$('pi').innerHTML=IO.map(([s,z,a,c],i)=>`<div class="prow"><span class="lb">${N(a,z,s,c)}</span><span class="ex" style="margin:0">Z = ${z}, muatan ${CH(c)}</span><select id="i${i}"><option value="">Jumlah e ...</option><option>10</option><option>18</option></select><span class="ex" id="ie${i}"></span></div>`).join('');
+$('pc2').onclick=()=>{let s=0,all=true;
+ IO.forEach(([,z,,c],i)=>{const v=$('i'+i).value,e=$('ie'+i);
+  if(!v){all=false;e.textContent='';return}
+  const ok=+v===z-c;if(ok)s++;e.style.color=ok?'var(--ok)':'var(--no)';e.textContent=`${ok?'Benar':'Cek lagi'}: e = ${z} \u2212 (${c}) = ${z-c}.`});
+ const r=$('pr2');if(all)rec('praktik2',Math.round(100*s/IO.length));r.hidden=false;r.textContent=all?`Skor bagian 2: ${s} dari ${IO.length}. ${s===IO.length?'Na+, Mg2+, F- isoelektron (10 e); Cl-, K+, S2- isoelektron (18 e).':'Perbaiki yang bertanda merah.'}`:'Isi semua jumlah elektron dulu.'};
+
+quiz('kz',[
+ {q:`${N(35,17,'Cl')} dan ${N(37,17,'Cl')} adalah ...`,o:OP,a:0,e:'Z sama (17), A berbeda (35 dan 37).'},
+ {q:`${N(40,18,'Ar')} dan ${N(40,20,'Ca')} adalah ...`,o:OP,a:1,e:'A sama (40), Z berbeda (18 dan 20).'},
+ {q:`${N(31,15,'P')} dan ${N(32,16,'S')} adalah ...`,o:OP,a:2,e:'n P = 16 dan n S = 16. Z dan A berbeda.'},
+ {q:`${N(23,11,'Na',1)} dan ${N(19,9,'F',-1)} adalah ...`,o:OP,a:3,e:'e Na+ = 11 − 1 = 10 dan e F− = 9 + 1 = 10. Z berbeda.'},
+ {q:'Manakah pasangan isoton?',o:[`${N(12,6,'C')} dan ${N(14,6,'C')}`,`${N(14,6,'C')} dan ${N(14,7,'N')}`,`${N(13,6,'C')} dan ${N(14,7,'N')}`,`${N(16,8,'O')} dan ${N(18,8,'O')}`,`${N(23,11,'Na')} dan ${N(19,9,'F')}`],a:2,e:'Karbon-13 dan nitrogen-14 sama-sama punya 7 neutron.'},
+ {q:`Jumlah elektron ion ${N(27,13,'Al',3)} adalah ...`,o:['10','13','14','16','27'],a:0,e:'e = Z − muatan = 13 − 3 = 10.'}
+],'instant',(s,p)=>rec('kuis',p));
+
+quiz('post',[
+ {q:TB(['Atom','Proton','Neutron'],[['P',17,18],['Q',17,20],['R',18,22],['S',19,21]])+'Pasangan atom yang merupakan isotop adalah ...',o:['P dan Q','P dan R','Q dan R','Q dan S','R dan S'],a:0,e:'P dan Q sama-sama 17 proton (Z = 17), sedangkan A = 35 dan 37. R dan S justru isobar (A = 40).'},
+ {q:TB(['Atom','Z','A'],[['A',6,13],['B',7,14],['C',8,16],['D',7,15],['E',9,19]])+'Pasangan atom yang merupakan isoton adalah ...',o:['A dan B','A dan C','B dan D','C dan E','D dan E'],a:0,e:'n A = 7, B = 7, C = 8, D = 8, E = 10. A dan B isoton. B dan D sama-sama Z = 7, jadi isotop.'},
+ {q:'Ion X<sup>2+</sup> isoelektron dengan atom Ar (Z = 18). Nomor atom X adalah ...',o:['16','18','19','20','22'],a:3,e:'e X²⁺ = 18, maka Z − 2 = 18 dan Z = 20.'},
+ {q:`Atom ${N(39,19,'K')} melepas satu elektron menjadi ion ${N(39,19,'K',1)}. Jumlah proton, neutron, dan elektron ion tersebut berturut-turut adalah ...`,o:['19, 20, 18','19, 20, 19','20, 19, 18','19, 39, 18','18, 20, 19'],a:0,e:'p = 19, n = 39 − 19 = 20, e = 19 − 1 = 18.'},
+ {q:`Atom Y isoton dengan ${N(14,7,'N')} dan isotop dengan ${N(12,6,'C')}. Nomor massa atom Y adalah ...`,o:['12','13','14','15','16'],a:1,e:'n Y = n N-14 = 7. Isotop C berarti Z = 6. A = 6 + 7 = 13.'},
+ {t:'mc',q:TB(['Atom','Z','A'],[['Q',11,23],['R',12,24],['S',11,24],['T',12,25],['U',13,27]])+'Pilih semua pasangan yang merupakan isoton.',o:['Q dan R','R dan S','S dan T','T dan U','Q dan S'],a:[0,2],e:'n Q = 12, R = 12, S = 13, T = 13, U = 14. Q–R dan S–T punya n sama dengan Z dan A berbeda. Q–S justru isotop.'},
+ {t:'mc',q:`Pilih semua spesies yang isoelektron dengan ion ${N(16,8,'O',-2)}.`,o:[N(20,10,'Ne'),N(24,12,'Mg',2),N(19,9,'F',-1),N(23,11,'Na'),N(32,16,'S',-2)],a:[0,1,2],e:'O²⁻ memiliki 10 elektron. Ne, Mg²⁺, dan F⁻ juga 10. Na netral 11 dan S²⁻ 18.'},
+ {t:'mc',q:`Perhatikan atom ${N(24,12,'Mg')}, ${N(25,12,'Mg')}, dan ${N(26,12,'Mg')}. Pilih semua pernyataan yang benar.`,o:['Ketiganya isotop.','Ketiganya memiliki 12 proton.','Ketiganya memiliki jumlah neutron yang sama.','Ketiganya isobar.','Atom Mg-25 memiliki 13 neutron.'],a:[0,1,4],e:'Z sama (12) dengan A berbeda, jadi isotop. Neutronnya 12, 13, 14, sehingga tidak sama dan bukan isobar.'},
+ {t:'kat',q:TB(['Atom','Z','A'],[['K',19,39],['L',20,40],['M',18,40]])+'K, L, dan M adalah atom netral. Tentukan apakah pernyataan berikut benar atau salah.',o:['L dan M adalah isobar.','K dan L adalah isoton.','L dan M adalah isoton.','Ion L<sup>2+</sup> isoelektron dengan atom M.'],a:[true,true,false,true],e:'A L = A M = 40 (isobar). n K = 20 dan n L = 20 (isoton). n M = 22, jadi L dan M bukan isoton. L²⁺ punya 18 elektron, sama dengan M.'},
+ {t:'kat',q:TB(['Spesies','Proton','Neutron','Elektron'],[['W',17,18,18],['X',17,20,17],['Y',19,21,18],['V',20,20,18]])+'Tentukan apakah pernyataan berikut benar atau salah.',o:['W dan X adalah isotop.','W adalah atom netral.','W, Y, dan V isoelektron.','Y dan V adalah isoton.'],a:[true,false,true,false],e:'W dan X sama-sama 17 proton. W bermuatan negatif (18 e, 17 p). W, Y, V sama-sama 18 elektron. n Y = 21 dan n V = 20, jadi bukan isoton (A keduanya 40, yaitu isobar).'}
+],'final',(s,p,o)=>{
+ rec('akhir',p);o.innerHTML+=(p>=80?' 🏅 Luar biasa!':p>=60?' 👍 Bagus.':' 💪 Ayo semangat.');o.innerHTML+=pre==null?'':` Asesmen awal: ${pre}, asesmen akhir: ${p}. ${p>pre?'Ada peningkatan, bagus.':p===pre?'Hasilnya setara; ulangi simulasi untuk menguatkan.':'Ulangi materi dan simulasi, lalu coba lagi.'}`});
+
+const DL=[
+{i:'🍌',t:'Pisang dan kalium',k:'bar',x:'Pisang kaya kalium. Sebagian kecil kalium alami adalah K-40 yang radioaktif lemah dan dapat meluruh menjadi Ca-40 atau Ar-40. Ketiganya bermassa 40, tetapi unsurnya berbeda.',a:[[40,19,'K'],[40,20,'Ca'],[40,18,'Ar']],c:'Isobar: A sama (40), Z berbeda (19, 20, 18).'},
+{i:'🦴',t:'Fosil dan arkeologi',k:'iso',x:'Umur fosil atau kayu kuno diperkirakan dengan karbon-14. Semua karbon punya 6 proton, tetapi C-12 punya 6 neutron dan C-14 punya 8. Sisa C-14 dipakai untuk menaksir umur.',a:[[12,6,'C'],[14,6,'C']],c:'Isotop: Z sama (6), A berbeda (12 dan 14).'},
+{i:'🧂',t:'Garam dan minuman elektrolit',k:'el',x:'Ion Na+, K+, dan Cl− dalam garam dan minuman elektrolit membantu saraf dan otot bekerja. K+ dan Cl− sama-sama punya 18 elektron, seperti atom argon.',a:[[39,19,'K',1],[35,17,'Cl',-1],[40,18,'Ar']],c:'Isoelektron: ketiganya 18 elektron, padahal Z-nya 19, 17, dan 18.'},
+{i:'🏥',t:'Kedokteran: yodium',k:'iso',x:'Garam beryodium mengandung I-127 yang stabil. Isotop radioaktifnya, I-131, dipakai dalam diagnosis dan terapi kelenjar tiroid.',a:[[127,53,'I'],[131,53,'I']],c:'Isotop: Z sama (53), neutron 74 dan 78.'},
+{i:'🥚',t:'Tulang dan telur',k:'ton',x:'Fosfor (P-31) terdapat di tulang dan DNA, sedangkan belerang (S-32) ada di protein seperti putih telur. Keduanya memiliki 16 neutron.',a:[[31,15,'P'],[32,16,'S']],c:'Isoton: n sama (16), Z dan A berbeda.'}];
+const seenD=new Set();
+DL.forEach((d,i)=>{const b=document.createElement('button');b.className='opt';b.innerHTML=`<span style="font-size:1.5rem">${d.i}</span><br>${d.t}`;
+ b.onclick=()=>{seenD.add(i);$('ad').innerHTML=`<b>${d.i} ${d.t}</b><p style="margin:6px 0">${d.x}</p><p style="margin:6px 0"><span class="big">${d.a.map(([A,Z,S,c])=>N(A,Z,S,c)).join(' &nbsp; ')}</span></p><div class="verd ${d.k}">${d.c}</div><p class="ex">Contoh dibuka: ${seenD.size} dari ${DL.length}</p>`};
+ $('ak').append(b)});
+const RS=['Saya dapat menentukan jumlah proton, neutron, dan elektron dari notasi atom atau ion.','Saya dapat membedakan isotop, isobar, dan isoton dari data atom.','Saya dapat menentukan atom atau ion yang isoelektron.','Contoh kehidupan sehari-hari membantu saya memahami materi.'],RV=[null,null,null,null];
+RS.forEach((t,i)=>{const r=document.createElement('div');r.className='kr';r.innerHTML=`<span>${i+1}. ${t}</span>`;
+ [1,2,3,4].forEach(v=>{const b=document.createElement('button');b.className='opt';b.textContent=v;b.setAttribute('aria-label',t+' nilai '+v);
+  b.onclick=()=>{RV[i]=v;r.querySelectorAll('button').forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};r.append(b)});
+ $('rl').append(r)});
+function jr(){const r=(S&&S.r)||{},f=v=>v==null?'-':v;
+ $('rj').innerHTML='<h3>Perjalanan belajarmu</h3><div class="tw"><table><thead><tr><th>Asesmen awal</th><th>Praktik 1</th><th>Praktik 2</th><th>Kuis</th><th>Asesmen akhir</th></tr></thead><tbody><tr>'+['awal','praktik1','praktik2','kuis','akhir'].map(k=>'<td>'+f(r[k])+'</td>').join('')+'</tr></tbody></table></div>'+(r.awal!=null&&r.akhir!=null?'<p>'+(r.akhir>r.awal?'Nilaimu naik '+(r.akhir-r.awal)+' poin dari asesmen awal.':r.akhir===r.awal?'Nilaimu setara dengan asesmen awal.':'Nilai akhirmu lebih rendah dari asesmen awal; ulangi simulasi dan praktik.')+'</p>':'<p class="ex">Selesaikan semua tahap agar perjalananmu terlihat lengkap.</p>')}
+$('rs').onclick=()=>{const m=$('rr');m.hidden=false;
+ if(RV.includes(null)){m.textContent='Isi keempat pernyataan dulu.';return}
+ const t=i=>$('t'+i).value.trim().slice(0,500);
+ recm({r1:RV[0],r2:RV[1],r3:RV[2],r4:RV[3],t1:t(1),t2:t(2),t3:t(3)});
+ m.textContent='Terima kasih. Refleksimu dicatat dan dikirim ke guru.'};
+go(0);if(S)enter();
+</script>
+</body>
+</html>
